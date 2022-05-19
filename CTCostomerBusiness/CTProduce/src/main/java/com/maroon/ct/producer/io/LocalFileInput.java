@@ -39,7 +39,7 @@ public class LocalFileInput implements DataIn {
 
         while ((line = reader.readLine()) != null) {
             try {
-                T t = clazz.newInstance();//反射
+                T t = clazz.newInstance(); //反射
                 t.setValue(line);
                 ts.add(t);
 
