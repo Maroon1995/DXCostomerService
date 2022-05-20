@@ -65,4 +65,16 @@ public class CallRecords {
     public void setDuration(String duration) {
         this.duration = duration;
     }
+
+    @Override
+    public String toString() {
+        return "CallRecords{" +
+                "maincall='" + maincall + '\'' +
+                ", maincall_name='" + maincall_name + '\'' +
+                ", bycall='" + bycall + '\'' +
+                ", bycall_name='" + bycall_name + '\'' +
+                ", data_time='" + data_time + '\'' +
+                ", duration='" + duration + '\'' +
+                '}';
+    }
 }
