@@ -2,13 +2,10 @@ package com.maroon.ct.producer.io;
 
 import com.maroon.ct.common.bean.DataOut;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class LocalFileOutput implements DataOut {
-    public LocalFileOutput(String path) throws IOException {
-        setPath(path);
-    }
-
+public class HbaseFileOutput implements DataOut {
     @Override
     public void setPath(String path) {
 
@@ -16,7 +13,6 @@ public class LocalFileOutput implements DataOut {
 
     @Override
     public void write() {
-
     }
 
     @Override
