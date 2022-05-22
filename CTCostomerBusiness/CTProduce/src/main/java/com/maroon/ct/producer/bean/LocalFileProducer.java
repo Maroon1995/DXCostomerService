@@ -36,8 +36,9 @@ public class LocalFileProducer implements Producer {
     public void produce() {
 
         try {
-            // 读取通讯录数据
+            // TODO 1-读取通讯录数据
             List<Contact> contacts = in.read(Contact.class);
+            // TODO 2-模拟生成通话记录
             List<Contact> randomList = getRandomList(contacts, 2); //随机抽取两个不同的电话号码
             while (flag) {
                 // 从通讯录中随机查找2个电话号码作为主叫和被叫
@@ -57,8 +58,8 @@ public class LocalFileProducer implements Producer {
                 // 生成通话记录
                 CallRecords callRecords = new CallRecords(maincall, maincall_name, bycall, bycall_name, data_time, duration);
                 System.out.println(callRecords.toString());
-                // 将通话记录写到数据文件中或Hbase中
-
+                // TODO 3-将通话记录写到数据本地日志文件中
+                out.write(callRecords.toString());
             }
         } catch (IOException e) {
             e.printStackTrace();

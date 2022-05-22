@@ -9,6 +9,9 @@ public class CallRecords {
     private String data_time;
     private String duration;
 
+    public CallRecords() {
+    }
+
     public CallRecords(String maincall, String maincall_name, String bycall, String bycall_name, String data_time, String duration) {
         this.maincall = maincall;
         this.maincall_name = maincall_name;
@@ -68,13 +71,6 @@ public class CallRecords {
 
     @Override
     public String toString() {
-        return "CallRecords{" +
-                "maincall='" + maincall + '\'' +
-                ", maincall_name='" + maincall_name + '\'' +
-                ", bycall='" + bycall + '\'' +
-                ", bycall_name='" + bycall_name + '\'' +
-                ", data_time='" + data_time + '\'' +
-                ", duration='" + duration + '\'' +
-                '}';
+        return maincall + "\t" + maincall_name + "\t" + bycall + "\t" + bycall_name + "\t" + data_time + "\t" + duration;
     }
 }

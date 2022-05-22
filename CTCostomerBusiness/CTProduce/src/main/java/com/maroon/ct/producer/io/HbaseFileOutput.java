@@ -12,7 +12,7 @@ public class HbaseFileOutput implements DataOut {
     }
 
     @Override
-    public void write() {
+    public void write(String log) {
     }
 
     @Override
