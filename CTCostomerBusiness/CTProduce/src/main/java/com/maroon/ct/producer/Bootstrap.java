@@ -9,10 +9,14 @@ import java.io.IOException;
 public class Bootstrap {
 
     public static void main(String[] args) throws IOException {
+        String intput_path = args[0];
+        String output_path = args[1];
 
         LocalFileProducer producer = new LocalFileProducer();
-        producer.setInput(new LocalFileInput("F:\\resouceDownloadPath\\baiDuCloud\\contact.log"));
-        producer.setOutput(new LocalFileOutput("F:\\resouceDownloadPath\\baiDuCloud\\call.log"));
+        producer.setInput(new LocalFileInput(intput_path));
+        producer.setOutput(new LocalFileOutput(output_path));
+//        producer.setInput(new LocalFileInput("F:\\resouceDownloadPath\\baiDuCloud\\contact.log"));
+//        producer.setOutput(new LocalFileOutput("F:\\resouceDownloadPath\\baiDuCloud\\call.log"));
         producer.produce();
 
     }
