@@ -11,8 +11,11 @@ public interface Producer extends Closeable {
 
     public void setOutput(DataOut out);
 
-    /*生产数据*/
-    public void produce();
+    /*无限生产数据*/
+    public void produce(String rate);
+
+    /*有限生产数据*/
+    public void produce(String rate, String limitnum);
 
 
 }
