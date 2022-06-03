@@ -19,7 +19,7 @@ public class Bootstrap {
         producer.setOutput(new LocalFileOutput(output_path));
 //        producer.setInput(new LocalFileInput("F:\\resouceDownloadPath\\baiDuCloud\\contact.log"));
 //        producer.setOutput(new LocalFileOutput("F:\\resouceDownloadPath\\baiDuCloud\\call.log"));
-        producer.produce("1000", "10");
+        producer.produce(rate, limitnum);
 
     }
 }

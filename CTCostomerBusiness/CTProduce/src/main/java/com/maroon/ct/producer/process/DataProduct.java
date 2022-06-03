@@ -38,6 +38,12 @@ public class DataProduct {
         return sampleList;
     }
 
+    /**
+     * 获取随记日期
+     * @param startDate
+     * @param endDate
+     * @return
+     */
     public String randomDate(String startDate, String endDate) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 

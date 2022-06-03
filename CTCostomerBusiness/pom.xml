@@ -11,6 +11,7 @@
     <modules>
         <module>CTCommon</module>
         <module>CTProduce</module>
+        <module>CTConsumer</module>
     </modules>
 
     <properties>
