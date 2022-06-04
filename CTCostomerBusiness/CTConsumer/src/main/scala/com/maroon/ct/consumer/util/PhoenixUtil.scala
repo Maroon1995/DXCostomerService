@@ -6,7 +6,7 @@ import scala.collection.mutable.ListBuffer
 
 object PhoenixUtil {
 
-  val propertiesName: String = "jdbc.properties" // 配置文件平常
+  var propertiesName: String = _ // 配置文件平常
   var conn: Connection = _
   var resultSet: ResultSet = _
   var ps: PreparedStatement = _

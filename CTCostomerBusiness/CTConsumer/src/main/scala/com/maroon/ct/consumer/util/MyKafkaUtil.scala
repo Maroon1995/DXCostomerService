@@ -3,14 +3,12 @@ package com.maroon.ct.consumer.util
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord}
 import org.apache.kafka.common.TopicPartition
 import org.apache.kafka.common.serialization.StringDeserializer
-import org.apache.spark.{SparkConf, SparkContext, streaming}
 import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.streaming.dstream.InputDStream
 import org.apache.spark.streaming.kafka010.{ConsumerStrategies, KafkaUtils, LocationStrategies}
 
-import java.{io, lang}
+import java.lang
 import java.util.Properties
-import scala.collection.mutable
 
 object MyKafkaUtil {
 
@@ -19,9 +17,9 @@ object MyKafkaUtil {
   val kafkaBrokerList: String = proper.getProperty("kafka.broker.list")
 
   // kafka消费者配置——定义可变集合
-  private val kafkaParams: mutable.Map[String, io.Serializable] = mutable.Map(
+  private val kafkaParams = collection.mutable.Map(
     ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG -> kafkaBrokerList,
-    ConsumerConfig.GROUP_ID_CONFIG -> "gmall2021_group", // 用于标识这个消费者属于哪个消费者团体
+    ConsumerConfig.GROUP_ID_CONFIG -> "ct_call_business_group", // 用于标识这个消费者属于哪个消费者团体
     ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG -> classOf[StringDeserializer], // 指定key和value的序列化方式
     ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG -> classOf[StringDeserializer],
     ConsumerConfig.AUTO_OFFSET_RESET_CONFIG -> "latest", // 自动重置偏移量为最新的偏移量

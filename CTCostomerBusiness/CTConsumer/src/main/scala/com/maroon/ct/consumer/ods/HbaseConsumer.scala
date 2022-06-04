@@ -7,9 +7,9 @@ import org.apache.hadoop.conf.Configuration
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.kafka.common.TopicPartition
 import org.apache.spark.SparkConf
+import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.streaming.dstream.{DStream, InputDStream}
 import org.apache.spark.streaming.kafka010.{HasOffsetRanges, OffsetRange}
-import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 import java.util.Date
 
@@ -17,8 +17,8 @@ object HbaseConsumer {
 
   def main(args: Array[String]): Unit = {
     // TODO 1-创建ssc对象
-    val conf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("hbaseconsumer")
-    val ssc = new StreamingContext(conf, Seconds(5))
+    val conf = new SparkConf().setMaster("local[4]").setAppName("hbaseconsumer")
+    val ssc: StreamingContext = new StreamingContext(conf, Seconds(4))
     // TODO 2-读取kafka中的数据
     // (1)主题名称和消费者组
     val topicName = "ct_callrecords"
@@ -44,7 +44,7 @@ object HbaseConsumer {
     val CallRecordsDStream: DStream[CallRecords] = offsetKafkaDstream.map {
       record =>
         val valuestr = record.value()
-        val arrCalls: Array[String] = valuestr.split("\n")
+        val arrCalls: Array[String] = valuestr.split("\t")
         CallRecords(arrCalls(0), arrCalls(1), arrCalls(2), arrCalls(3), arrCalls(4), arrCalls(5)) // 重新封装成CallRecords
     }
     // TODO 5-写入Hbase
@@ -52,14 +52,14 @@ object HbaseConsumer {
     CallRecordsDStream.foreachRDD{
       rdd =>
         rdd.saveToPhoenix(
-        "CALLRECORDS",
+          "CALLRECORDSS",
         Seq("maincall","maincall_name","bycall","bycall_name","data_time","duration"),
         new Configuration,
         Some("hadoop01,hadoop02,hadoop03:2181")
       )
         rdd.foreach(
           callrecords =>
-            System.out.println(callrecords)
+            System.out.println(callrecords.toString)
         )
         // TODO 6-维护偏移量
         OffsetManagerUtil.saveOffset(topicName,groupId,offsetRanges)
